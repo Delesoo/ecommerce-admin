@@ -1,8 +1,9 @@
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Logo from "./Logo";
 
-export default function Nav() {
+export default function Nav({show}) {
     const inactiveLink = 'flex gap-1 p-1';
     const activeLink = inactiveLink+' bg-highlight text-black rounded-md';
     const inactiveIcon = 'w-6 h-6';
@@ -14,17 +15,11 @@ export default function Nav() {
       await signOut();
     }
     return (
-        <aside className="text-gray-500 p-4">
-            <Link href={'/'} className="flex gap-1 mb-4 mr-4">
+        <aside className={(show?'left-0':'-left-full')+" top-0 text-gray-500 p-4 fixed w-full bg-bgGray h-full -left-full md:static md:w-auto transition-all"}>
+          <div className="mb-4 mr-4">
+          <Logo />
 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-</svg>
-
-            <span className="">
-                EcommerceAdmin
-            </span>
-            </Link>
+          </div>
 
             <nav className="flex flex-col gap-2">
                 <Link href={'/'} className={pathname === '/' ? activeLink : inactiveLink}>
