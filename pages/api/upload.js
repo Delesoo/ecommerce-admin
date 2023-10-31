@@ -6,9 +6,9 @@ import { mongooseConnect } from '@/lib/mongoose';
 import { isAdminRequest } from './auth/[...nextauth]';
 const bucketName = 'deleso-next-ecommerce';
 
-export default async function handle(req, res) {
+export default async function handle(req,res) {
     await mongooseConnect();
-    await isAdminRequest(res,req);
+    await isAdminRequest(req,res);
     
     const form = new multiparty.Form();
     const {fields,files} = await new Promise((resolve, reject) => {
